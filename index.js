@@ -11,6 +11,7 @@ const watchedAtValidation = require('./middlewares/panelistValidations/watchedAt
 const rateValidation = require('./middlewares/panelistValidations/rateValidation');
 const panelistCreation = require('./middlewares/panelistCreation');
 const editPanelistById = require('./middlewares/editPanelistById');
+const deletePanelist = require('./middlewares/deletePaneslist');
 
 const app = express();
 app.use(bodyParser.json());
@@ -46,6 +47,8 @@ app.put('/talker/:id',
   rateValidation,
   watchedAtValidation,
   editPanelistById);
+
+app.delete('/talker/:id', tokenValidation, deletePanelist);
 
 app.listen(PORT, () => {
   console.log('Online');
