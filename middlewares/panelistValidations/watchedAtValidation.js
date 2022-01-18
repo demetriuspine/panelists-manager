@@ -7,7 +7,7 @@ function watchedAtValidation(req, res, next) {
     return res.status(400).json({ message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' });
   }
 
-  next();
+  next(); // https://expressjs.com/pt-br/guide/using-middleware.html e https://stackoverflow.com/questions/10695629/what-is-the-parameter-next-used-for-in-express
 }
 
 module.exports = watchedAtValidation;
