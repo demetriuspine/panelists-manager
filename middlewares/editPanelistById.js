@@ -9,7 +9,7 @@ async function editPanelistById(req, res) {
   try {
     const data = await promises.readFile(indexRelativeFilepath, 'utf-8');
     const parsedData = await JSON.parse(data);
-    const panelistIndex = parsedData.findIndex((talker) => `${talker.id}` === id);
+    const panelistIndex = parsedData.findIndex((talker) => talker.id === Number(id));
     if (panelistIndex === -1) { // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
       return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
     }
