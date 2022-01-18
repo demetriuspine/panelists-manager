@@ -12,6 +12,7 @@ const rateValidation = require('./middlewares/panelistValidations/rateValidation
 const panelistCreation = require('./middlewares/panelistCreation');
 const editPanelistById = require('./middlewares/editPanelistById');
 const deletePanelist = require('./middlewares/deletePanelist');
+const searchPanelist = require('./middlewares/searchPanelist');
 
 const app = express();
 app.use(bodyParser.json());
@@ -26,21 +27,23 @@ app.get('/', (_request, response) => {
 
 app.get('/talker', getAllPanelists);
 
+app.get('/talker/search', tokenValidation, searchPanelist);
+
 app.get('/talker/:id', getPanelistById);
 
 app.post('/login', login);
 
 app.post('/talker',
-  tokenValidation,
-  nameValidation,
-  ageValidation,
-  panelistValidation,
-  watchedAtValidation,
-  rateValidation,
-  panelistCreation);
+tokenValidation,
+nameValidation,
+ageValidation,
+panelistValidation,
+watchedAtValidation,
+rateValidation,
+panelistCreation);
 
 app.put('/talker/:id',
-  tokenValidation,
+tokenValidation,
   nameValidation,
   ageValidation,
   panelistValidation,
