@@ -3,6 +3,13 @@ const bodyParser = require('body-parser');
 const getAllPanelists = require('./middlewares/getAllPanelists');
 const getPanelistById = require('./middlewares/getPanelistById');
 const login = require('./middlewares/login');
+const tokenValidation = require('./middlewares/panelistValidations/tokenValidation');
+const nameValidation = require('./middlewares/panelistValidations/nameValidation');
+const ageValidation = require('./middlewares/panelistValidations/ageValidation');
+const panelistValidation = require('./middlewares/panelistValidations/panelistValidation');
+const watchedAtValidation = require('./middlewares/panelistValidations/watchedAtValidation');
+const rateValidation = require('./middlewares/panelistValidations/rateValidation');
+const panelistCreation = require('./middlewares/panelistCreation');
 
 const app = express();
 app.use(bodyParser.json());
@@ -20,6 +27,15 @@ app.get('/talker', getAllPanelists);
 app.get('/talker/:id', getPanelistById);
 
 app.post('/login', login);
+
+app.post('/talker',
+  tokenValidation,
+  nameValidation,
+  ageValidation,
+  panelistValidation,
+  watchedAtValidation,
+  rateValidation,
+  panelistCreation);
 
 app.listen(PORT, () => {
   console.log('Online');
