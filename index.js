@@ -10,6 +10,7 @@ const panelistValidation = require('./middlewares/panelistValidations/panelistVa
 const watchedAtValidation = require('./middlewares/panelistValidations/watchedAtValidation');
 const rateValidation = require('./middlewares/panelistValidations/rateValidation');
 const panelistCreation = require('./middlewares/panelistCreation');
+const editPanelistById = require('./middlewares/editPanelistById');
 
 const app = express();
 app.use(bodyParser.json());
@@ -36,6 +37,15 @@ app.post('/talker',
   watchedAtValidation,
   rateValidation,
   panelistCreation);
+
+app.put('/talker/:id',
+  tokenValidation,
+  nameValidation,
+  ageValidation,
+  panelistValidation,
+  rateValidation,
+  watchedAtValidation,
+  editPanelistById);
 
 app.listen(PORT, () => {
   console.log('Online');
